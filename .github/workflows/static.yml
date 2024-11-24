@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limestone Pavement Formation</title>
+  <style>
+    body {
+      font-family: monospace;
+      background-color: #222;
+      color: #eee;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    #ascii-art {
+      white-space: pre;
+      font-size: 16px;
+      line-height: 1.5;
+      border: 1px solid #555;
+      padding: 10px;
+      width: auto;
+    }
+    #stage-desc {
+      margin-top: 20px;
+      font-size: 18px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="ascii-art"></div>
+  <div id="stage-desc"></div>
+
+  <script>
+    // ASCII art grids for each stage
+    const stages = [
+      {
+        desc: "Glaciation: Glacial abrasion exposes bare limestone rock.",
+        grid: Array(20).fill().map((_, i) =>
+          Array(20).fill().map((_, j) => ((i + j) % 2 === 0 ? "#" : ".")).join("")
+        ).join("\n")
+      },
+      {
+        desc: "Water seeps through permeable cracks in the limestone.",
+        grid: Array(20).fill().map((_, i) =>
+          Array(20).fill().map((_, j) => ((i + j) % 2 === 0 ? "#" : "|")).join("")
+        ).join("\n")
+      },
+      {
+        desc: "Rainwater reacts with limestone, enlarging joints and cracks.",
+        grid: Array(20).fill().map((_, i) =>
+          Array(20).fill().map((_, j) => ((i + j) % 2 === 0 ? "#" : "/")).join("")
+        ).join("\n")
+      },
+      {
+        desc: "Chemical weathering widens cracks to form grikes and clints.",
+        grid: Array(20).fill().map((_, i) =>
+          Array(20).fill().map((_, j) => ((i + j) % 3 === 0 ? "#" : "-")).join("")
+        ).join("\n")
+      },
+      {
+        desc: "Resulting limestone pavement: exposed clints and deep grikes.",
+        grid: Array(20).fill().map((_, i) =>
+          Array(20).fill().map((_, j) => ((i + j) % 4 === 0 ? "#" : " ")).join("")
+        ).join("\n")
+      }
+    ];
+
+    // References to HTML elements
+    const asciiArt = document.getElementById("ascii-art");
+    const stageDesc = document.getElementById("stage-desc");
+
+    // Animation loop
+    let currentStage = 0;
+
+    function showStage() {
+      const stage = stages[currentStage];
+      asciiArt.textContent = stage.grid;
+      stageDesc.textContent = stage.desc;
+      currentStage = (currentStage + 1) % stages.length;
+    }
+
+    // Start animation
+    showStage();
+    setInterval(showStage, 2000); // Change stage every 2 seconds
+  </script>
+</body>
+</html>
